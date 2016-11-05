@@ -107,7 +107,25 @@ function inName(name) {
 
 $('#main').append(internationalizeButton);
 
+projects.display = function() {
+  debugger;
+  $('#projects').append(HTMLprojectStart);
+  for (project in projects.projects) {
 
+    var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+    var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+    var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+    var formattedImage= HTMLprojectImage.replace("%data%", projects.projects[project].image);
+
+    $(".project-entry:last").append(formattedTitle);
+    $(".project-entry:last").append(formattedDates);
+    $(".project-entry:last").append(formattedDescription);
+    $(".project-entry:last").append(formattedImage);
+
+  }
+};
+
+projects.display();
 /*
 var bio = {
   "name" : HTMLheaderName.replace("%data%", "Paul Mills"),
