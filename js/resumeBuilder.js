@@ -3,40 +3,51 @@ var bio = {
   "role" : "Marketing Web Developer",
   "contact" : "pdfmills@gmail.com",
   "bioPic" : "images/mypic.jpg",
-  "welcome_msg" : "Welcome to my resume!",
+  "welcomeMsg" : "Welcome to my resume!",
   "skills" : ["Content Marketing", " Email Marketing", " HTML", " CSS", " Copywritting"],
 };
 
 var projects = {
-  "title" : "Build a Portfolio",
-  "dates" : "September",
-  "description" : "Portfolio project",
-  "image" : "images/fry.jpg"
+  "projects" : [
+    {
+      "title" : "Build a Portfolio",
+      "dates" : "September",
+      "description" : "Portfolio project",
+      "image" : "images/fry.jpg"
+    }
+  ]
 };
 
 var work = {
-  "employer" : "IXL Learning",
-  "title" : "Marketing Associate",
-  "dates" : "July 2014-June 2016",
-  "location" : "San Mateo, CA",
-  "description" : "Handled print collateral, E-mail marketing, Other tasks as required"
+  "jobs": [
+    {
+      "employer" : "IXL Learning",
+      "title" : "Marketing Associate",
+      "dates" : "July 2014 - June 2016",
+      "location" : "San Mateo, CA",
+      "description" : "Handled print collateral, E-mail marketing, Other tasks as required"
+    }
+  ]
 };
 
 var education = {
-  "schools":
+  "schools": [
     {
       "name": "Colgate University",
       "degree": "Bachelor of Arts",
       "city": "Hamilton, NY, US",
       "major": "Asian Studies, Minor: Economics",
       "graduated": "2008-2012"
-    },
-  "online": {
+    }
+  ],
+  "onlineCourses": [
+    {
     "title" : "Intro to HTML",
     "school" : "Udacity",
     "dates" : "June 2016",
     "url" : "www.udacity.com",
-  }
+    }
+  ]
 };
 
 if ( bio.name.length > 1) {
@@ -59,6 +70,22 @@ if ( bio.skills.length > 0) {
   $("#skills").append(formattedSkill);
   formattedSkill = HTMLskills.replace("%data%", bio.skills[4]);
   $("#skills").append(formattedSkill);
+};
+
+for (job in work.jobs) {
+  $("#workExperience").append(HTMLworkStart);
+
+  var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+  var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+  var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+  var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+  var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+  var formattedEmployerAndTitle = formattedEmployer + formattedTitle;
+
+  $(".work-entry:last").append(formattedEmployerAndTitle);
+  $(".work-entry:last").append(formattedDates);
+  $(".work-entry:last").append(formattedLocation);
+  $(".work-entry:last").append(formattedDescription);
 };
 /*
 var bio = {
