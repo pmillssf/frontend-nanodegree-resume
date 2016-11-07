@@ -1,7 +1,10 @@
 var bio = {
   "name" : "Paul Mills",
   "role" : "Marketing Web Developer",
-  "contact" : "pdfmills@gmail.com",
+  "contacts" : {
+    "email" : "pdfmills@gmail.com",
+    "location" : "San Francisco, CA, 94123"
+  },
   "bioPic" : "images/mypic.jpg",
   "welcomeMsg" : "Welcome to my resume!",
   "skills" : ["Content Marketing", " Email Marketing", " HTML", " CSS", " Copywritting"],
@@ -37,7 +40,8 @@ var education = {
       "degree": "Bachelor of Arts",
       "city": "Hamilton, NY, US",
       "major": "Asian Studies, Minor: Economics",
-      "graduated": "2008-2012"
+      "graduated": "2008-2012",
+      "location": "Colgate University"
     }
   ],
   "onlineCourses": [
@@ -108,7 +112,6 @@ function inName(name) {
 $('#main').append(internationalizeButton);
 
 projects.display = function() {
-  debugger;
   $('#projects').append(HTMLprojectStart);
   for (project in projects.projects) {
 
@@ -126,6 +129,7 @@ projects.display = function() {
 };
 
 projects.display();
+$("#mapDiv").append(googleMap);
 /*
 var bio = {
   "name" : HTMLheaderName.replace("%data%", "Paul Mills"),
