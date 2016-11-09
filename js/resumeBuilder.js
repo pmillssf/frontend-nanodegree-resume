@@ -8,12 +8,12 @@ var bio = {
         "twitter": "@",
         "location": "San Francisco, CA, 94123"
     },
-    "bioPic": "images/mypic.jpg",
+    "biopic": "images/mypic.jpg",
     "welcomeMessage": "Welcome to my resume!",
     "skills": ["Content Marketing", " Email Marketing", " HTML", " CSS", " Copywritting"],
     "display": function() {
 
-        var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+        var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
         $("#header").append(formattedBioPic);
         var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
         $("#header").append(formattedWelcomeMessage);
@@ -115,8 +115,9 @@ var education = {
         "name": "Colgate University",
         "location": "Colgate University, Hamilton, NY, US",
         "degree": "Bachelor of Arts",
-        "major": ["Asian Studies", " Minor: Economics"],
+        "majors": ["Asian Studies", " Minor: Economics"],
         "dates": "2008-2012",
+        "url": "http://www.colgate.edu/"
     }],
     "onlineCourses": [{
         "title": "Intro to HTML",
@@ -140,7 +141,7 @@ var education = {
                 var formattedDates = HTMLschoolDates.replace("%data%", school.dates);
                 $(".education-entry:last").append(formattedDates);
 
-                var formattedMajor = HTMLschoolMajor.replace("%data%", school.major);
+                var formattedMajor = HTMLschoolMajor.replace("%data%", school.majors);
                 $(".education-entry:last").append(formattedMajor);
             });
         }
