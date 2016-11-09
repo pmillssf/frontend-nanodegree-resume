@@ -14,14 +14,28 @@ var bio = {
 };
 
 var projects = {
-  "projects" : [
-    {
-      "title" : "Build a Portfolio",
-      "dates" : "September",
-      "description" : "Portfolio project",
-      "image" : ["images/fry.jpg"]
+  "projects" : [{
+    "title" : "Build a Portfolio",
+    "dates" : "September",
+    "description" : "Portfolio project",
+    "image" : ["images/fry.jpg"]
+  }],
+  "display" : function() {
+    if (projects.projects.length > 0) {
+      projects.projects.forEach(function(project) {
+          $('#projects').append(HTMLprojectStart);
+          var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
+          var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
+          var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
+          var formattedImage= HTMLprojectImage.replace("%data%", project.image);
+
+          $(".project-entry:last").append(formattedTitle);
+          $(".project-entry:last").append(formattedDates);
+          $(".project-entry:last").append(formattedDescription);
+          $(".project-entry:last").append(formattedImage);
+      })
     }
-  ]
+  }
 };
 
 var work = {
@@ -113,23 +127,6 @@ function inName(name) {
 }
 
 $('#main').append(internationalizeButton);
-
-projects.display = function() {
-  if (projects.projects.length > 0) {
-    projects.projects.forEach(function(project) {
-        $('#projects').append(HTMLprojectStart);
-        var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
-        var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
-        var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
-        var formattedImage= HTMLprojectImage.replace("%data%", project.image);
-
-        $(".project-entry:last").append(formattedTitle);
-        $(".project-entry:last").append(formattedDates);
-        $(".project-entry:last").append(formattedDescription);
-        $(".project-entry:last").append(formattedImage);
-    })
-  }
-};
 
 projects.display();
 
