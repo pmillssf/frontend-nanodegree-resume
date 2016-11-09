@@ -56,8 +56,8 @@ var projects = {
   }],
   "display" : function() {
     if (projects.projects.length > 0) {
+      $('#projects').append(HTMLprojectStart);
       projects.projects.forEach(function(project) {
-          $('#projects').append(HTMLprojectStart);
           var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
           $(".project-entry:last").append(formattedTitle);
 
@@ -84,8 +84,28 @@ var work = {
       "location" : "San Mateo, CA",
       "dates" : "July 2014 - June 2016",
       "description" : "Handled print collateral, E-mail marketing, Other tasks as required"
+    }],
+    "display" : function() {
+      if (work.jobs.length > 0) {
+        $("#workExperience").append(HTMLworkStart);
+        work.jobs.forEach(function(job) {
+
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+            var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+            var formattedEmployerAndTitle = formattedEmployer + formattedTitle;
+            $(".work-entry:last").append(formattedEmployerAndTitle);
+
+            var formattedDates = HTMLworkDates.replace("%data%", job.dates);
+            $(".work-entry:last").append(formattedDates);
+
+            var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
+            $(".work-entry:last").append(formattedLocation);
+
+            var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
+            $(".work-entry:last").append(formattedDescription);
+        })
+      }
     }
-  ]
 };
 
 var education = {
@@ -109,26 +129,6 @@ var education = {
   ]
 };
 
-function displayWork () {
-  for (job in work.jobs) {
-    $("#workExperience").append(HTMLworkStart);
-
-    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-    var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-    var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-    var formattedEmployerAndTitle = formattedEmployer + formattedTitle;
-
-    $(".work-entry:last").append(formattedEmployerAndTitle);
-    $(".work-entry:last").append(formattedDates);
-    $(".work-entry:last").append(formattedLocation);
-    $(".work-entry:last").append(formattedDescription);
-  }
-};
-
-displayWork();
-
 $(document).click(function(loc) {
   var x = loc.pageX;
   var y = loc.pageY;
@@ -145,6 +145,7 @@ function inName(name) {
 
 $('#main').append(internationalizeButton);
 bio.display();
+work.display();
 projects.display();
 
 $("#mapDiv").append(googleMap);
