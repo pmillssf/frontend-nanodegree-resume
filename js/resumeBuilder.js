@@ -11,6 +11,9 @@ var bio = {
   "bioPic" : "images/mypic.jpg",
   "welcomeMessage" : "Welcome to my resume!",
   "skills" : ["Content Marketing", " Email Marketing", " HTML", " CSS", " Copywritting"],
+//  "display": function() {
+//    if (bio.length > 0)
+//  }
 };
 
 var projects = {
@@ -18,21 +21,25 @@ var projects = {
     "title" : "Build a Portfolio",
     "dates" : "September",
     "description" : "Portfolio project",
-    "image" : ["images/fry.jpg"]
+    "images" : ["images/fry.jpg", "images/fry.jpg"]
   }],
   "display" : function() {
     if (projects.projects.length > 0) {
       projects.projects.forEach(function(project) {
           $('#projects').append(HTMLprojectStart);
           var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
-          var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
-          var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
-          var formattedImage= HTMLprojectImage.replace("%data%", project.image);
-
           $(".project-entry:last").append(formattedTitle);
+
+          var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
           $(".project-entry:last").append(formattedDates);
+
+          var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
           $(".project-entry:last").append(formattedDescription);
-          $(".project-entry:last").append(formattedImage);
+
+          for (i = 0; i < project.images.length; i++ ) {
+            var formattedImage= HTMLprojectImage.replace("%data%", project.images[i]);
+            $(".project-entry:last").append(formattedImage);
+          };
       })
     }
   }
