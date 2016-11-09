@@ -2,11 +2,14 @@ var bio = {
   "name" : "Paul Mills",
   "role" : "Marketing Web Developer",
   "contacts" : {
+    "mobile" : "xxx-xxx-xxxx",
     "email" : "pdfmills@gmail.com",
+    "github" : "https://github.com/pmillssf/",
+    "twitter" : "@",
     "location" : "San Francisco, CA, 94123"
   },
   "bioPic" : "images/mypic.jpg",
-  "welcomeMsg" : "Welcome to my resume!",
+  "welcomeMessage" : "Welcome to my resume!",
   "skills" : ["Content Marketing", " Email Marketing", " HTML", " CSS", " Copywritting"],
 };
 
@@ -16,7 +19,7 @@ var projects = {
       "title" : "Build a Portfolio",
       "dates" : "September",
       "description" : "Portfolio project",
-      "image" : "images/fry.jpg"
+      "image" : ["images/fry.jpg"]
     }
   ]
 };
@@ -26,8 +29,8 @@ var work = {
     {
       "employer" : "IXL Learning",
       "title" : "Marketing Associate",
-      "dates" : "July 2014 - June 2016",
       "location" : "San Mateo, CA",
+      "dates" : "July 2014 - June 2016",
       "description" : "Handled print collateral, E-mail marketing, Other tasks as required"
     }
   ]
@@ -37,11 +40,11 @@ var education = {
   "schools": [
     {
       "name": "Colgate University",
+      "location": "Colgate University, Hamilton, NY, US",
       "degree": "Bachelor of Arts",
-      "city": "Hamilton, NY, US",
-      "major": "Asian Studies, Minor: Economics",
+      "major": ["Asian Studies", "Minor: Economics"],
       "graduated": "2008-2012",
-      "location": "Colgate University"
+      "url": "http://www.colgate.edu/"
     }
   ],
   "onlineCourses": [
@@ -112,23 +115,24 @@ function inName(name) {
 $('#main').append(internationalizeButton);
 
 projects.display = function() {
-  $('#projects').append(HTMLprojectStart);
-  for (project in projects.projects) {
+  if (projects.projects.length > 0) {
+    projects.projects.forEach(function(project) {
+        $('#projects').append(HTMLprojectStart);
+        var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
+        var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
+        var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
+        var formattedImage= HTMLprojectImage.replace("%data%", project.image);
 
-    var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-    var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-    var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-    var formattedImage= HTMLprojectImage.replace("%data%", projects.projects[project].image);
-
-    $(".project-entry:last").append(formattedTitle);
-    $(".project-entry:last").append(formattedDates);
-    $(".project-entry:last").append(formattedDescription);
-    $(".project-entry:last").append(formattedImage);
-
+        $(".project-entry:last").append(formattedTitle);
+        $(".project-entry:last").append(formattedDates);
+        $(".project-entry:last").append(formattedDescription);
+        $(".project-entry:last").append(formattedImage);
+    })
   }
 };
 
 projects.display();
+
 $("#mapDiv").append(googleMap);
 /*
 var bio = {
