@@ -58,19 +58,19 @@ var projects = {
     if (projects.projects.length > 0) {
       $('#projects').append(HTMLprojectStart);
       projects.projects.forEach(function(project) {
-          var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
-          $(".project-entry:last").append(formattedTitle);
+        var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
+        $(".project-entry:last").append(formattedTitle);
 
-          var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
-          $(".project-entry:last").append(formattedDates);
+        var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
+        $(".project-entry:last").append(formattedDates);
 
-          var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
-          $(".project-entry:last").append(formattedDescription);
+        var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
+        $(".project-entry:last").append(formattedDescription);
 
-          for (i = 0; i < project.images.length; i++ ) {
-            var formattedImage= HTMLprojectImage.replace("%data%", project.images[i]);
-            $(".project-entry:last").append(formattedImage);
-          };
+        for (i = 0; i < project.images.length; i++ ) {
+          var formattedImage= HTMLprojectImage.replace("%data%", project.images[i]);
+          $(".project-entry:last").append(formattedImage);
+        };
       })
     }
   }
@@ -89,20 +89,19 @@ var work = {
       if (work.jobs.length > 0) {
         $("#workExperience").append(HTMLworkStart);
         work.jobs.forEach(function(job) {
+          var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+          var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+          var formattedEmployerAndTitle = formattedEmployer + formattedTitle;
+          $(".work-entry:last").append(formattedEmployerAndTitle);
 
-            var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
-            var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
-            var formattedEmployerAndTitle = formattedEmployer + formattedTitle;
-            $(".work-entry:last").append(formattedEmployerAndTitle);
+          var formattedDates = HTMLworkDates.replace("%data%", job.dates);
+          $(".work-entry:last").append(formattedDates);
 
-            var formattedDates = HTMLworkDates.replace("%data%", job.dates);
-            $(".work-entry:last").append(formattedDates);
+          var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
+          $(".work-entry:last").append(formattedLocation);
 
-            var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
-            $(".work-entry:last").append(formattedLocation);
-
-            var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
-            $(".work-entry:last").append(formattedDescription);
+          var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
+          $(".work-entry:last").append(formattedDescription);
         })
       }
     }
@@ -114,9 +113,8 @@ var education = {
       "name": "Colgate University",
       "location": "Colgate University, Hamilton, NY, US",
       "degree": "Bachelor of Arts",
-      "major": ["Asian Studies", "Minor: Economics"],
-      "graduated": "2008-2012",
-      "url": "http://www.colgate.edu/"
+      "major": ["Asian Studies", " Minor: Economics"],
+      "dates": "2008-2012",
     }
   ],
   "onlineCourses": [
@@ -126,8 +124,61 @@ var education = {
     "dates" : "June 2016",
     "url" : "www.udacity.com",
     }
-  ]
+  ],
+  "display" : function() {
+    if (education.schools.length > 0) {
+      $("#education").append(HTMLschoolStart);
+
+      education.schools.forEach(function(school) {
+        var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+        var formattedDegree = HTMLschoolDegree.replace("%data%", school.degree);
+        var formattedSchoolNameAndDegree = formattedSchoolName + formattedDegree;
+        $(".education-entry:last").append(formattedSchoolNameAndDegree);
+
+        var formattedLocation = HTMLschoolLocation.replace("%data%", school.location);
+        $(".education-entry:last").append(formattedLocation);
+
+
+        var formattedDates = HTMLschoolDates.replace("%data%", school.dates);
+        $(".education-entry:last").append(formattedDates);
+
+        var formattedMajor = HTMLschoolMajor.replace("%data%", school.major);
+        $(".education-entry:last").append(formattedMajor);
+      })
+    };
+
+    if (education.onlineCourses.length > 0) {
+      $("#education").append(HTMLonlineClasses);
+
+      education.onlineCourses.forEach(function(onlineCourse) {
+        $("#education").append(HTMLschoolStart)
+        var formattedTitle = HTMLonlineTitle.replace("%data%", onlineCourse.title);
+        var formattedSchoolName = HTMLonlineSchool.replace("%data%", onlineCourse.school);
+        var formattedTitleAndSchoolName = formattedTitle + formattedSchoolName
+        $(".education-entry:last").append(formattedTitleAndSchoolName);
+
+        var formattedDates = HTMLonlineDates.replace("%data%", onlineCourse.dates);
+        $(".education-entry:last").append(formattedDates);
+
+        var formattedUrl = HTMLonlineURL.replace("%data%", onlineCourse.url)
+        $(".education-entry:last").append(formattedUrl);
+      })
+    }
+  }
 };
+
+/*$("#education").append(HTMLschoolStart);
+$("#education").append(education["schools"]["name"]);
+$("#education").append(education["schools"]["degree"]);
+$("#education").append(education["schools"]["city"]);
+$("#education").append(education["schools"]["major"]);
+$("#education").append(education["schools"]["graduated"]);
+$("#education").append(HTMLonlineClasses);
+$("#education").append(education["online"]["title"]);
+$("#education").append(education["online"]["school"]);
+$("#education").append(education["online"]["dates"]);
+$("#education").append(education["online"]["url"]);
+*/
 
 $(document).click(function(loc) {
   var x = loc.pageX;
@@ -147,6 +198,7 @@ $('#main').append(internationalizeButton);
 bio.display();
 work.display();
 projects.display();
+education.display();
 
 $("#mapDiv").append(googleMap);
 /*
